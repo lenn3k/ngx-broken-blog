@@ -1,0 +1,129 @@
+<div class="container d-flex flex-row flex-nowrap">
+
+  <div class="forum-list mr-2 w-100">
+
+    <div class="mb-2">
+      <div class="bg-dark" style="min-height: 60px; border-radius: 3px 3px 0 0">
+        <span class="text-light px-4 mb-0" style="line-height: 60px;">Main</span>
+      </div>
+
+      <ul class="post-list px-4">
+
+        <li class="d-flex flex-row flex-nowrap py-3">
+
+          <div class="mr-auto">
+            <a href="#" class="forum-title">Informations</a>
+            <br/><span class="text-grey">Everything you should know.</span>
+            <div class="responsive-show" style="display: none;">
+              Topics: <strong>2</strong>
+            </div>
+          </div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">2<br/>posts</div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">2<br/>comments</div>
+
+          <div style="width: 250px;" class="text-right d-none d-sm-block">
+            <a href="#" title="Welcome">Welcome</a> <br/>
+
+          by <a href="#" style="color: #AA0000;"
+                class="username-coloured">Gramziu</a>
+          24 Feb 2015, 21:50
+          </div>
+
+
+        </li>
+        <li class="d-flex flex-row flex-nowrap py-3">
+
+          <div class="mr-auto">
+            <a href="#" class="forum-title">Informations</a>
+            <br/><span class="text-grey">Everything you should know.</span>
+            <div class="responsive-show" style="display: none;">
+              Topics: <strong>2</strong>
+            </div>
+          </div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>posts</div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>comments</div>
+
+          <div style="width: 250px;" class="text-right">
+            <a href="#" title="Welcome">Welcome</a> <br/>
+
+          by <a href="#" style="color: #AA0000;"
+                class="username-coloured">Gramziu</a>
+          24 Feb 2015, 21:50
+          </div>
+
+
+        </li>
+        <li class="d-flex flex-row flex-nowrap py-3">
+
+          <div class="mr-auto">
+            <a href="#" class="forum-title">Informations</a>
+            <br/><span class="text-grey">Everything you should know.</span>
+            <div class="responsive-show" style="display: none;">
+              Topics: <strong>2</strong>
+            </div>
+          </div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>posts</div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>comments</div>
+
+          <div style="width: 250px;" class="text-right">
+            <a href="#" title="Welcome">Welcome</a> <br/>
+
+          by <a href="#" style="color: #AA0000;"
+                class="username-coloured">Gramziu</a>
+          24 Feb 2015, 21:50
+          </div>
+
+
+        </li>
+
+
+
+
+
+
+
+      </ul>
+
+    </div>
+
+
+  </div>
+
+  <div class="sidebar d-lg-block d-none">
+
+    <div class="side-block">
+      <img src="../assets/images/jworks-250x250.png" alt="Powered by" style="border-radius: 3px;">
+    </div>
+
+    <div class="side-block side-login">
+      <form method="post" action="./ucp.php?style=5&amp;mode=login">
+        <h4 class="side-block-head"><a href="./ucp.php?style=5&amp;mode=login">Login</a>&nbsp; &bull; &nbsp;<a
+          href="./ucp.php?style=5&amp;mode=register">Register</a></h4>
+        <div class="side-block-body">
+          <fieldset>
+            <input type="text" tabindex="1" name="username" id="username" size="10" class="inputbox"
+                   title="Username" placeholder="Username"/><input type="password" tabindex="2" name="password"
+                                                                   id="password" size="10" class="inputbox"
+                                                                   title="Password" placeholder="Password"
+                                                                   autocomplete="off"/>
+            <br/>
+            <a href="./ucp.php?style=5&amp;mode=sendpassword">I forgot my password</a>
+            <label for="autologin" id="remember-me"><input type="checkbox" tabindex="4" name="autologin"
+                                                           id="autologin"/>Remember me</label>
+            <br/>
+            <input type="submit" tabindex="5" name="login" value="Login" class="button2"/>
+            <input type="hidden" name="redirect" value="./index.php?style=5&amp;style=5"/>
+
+          </fieldset>
+        </div>
+      </form>
+    </div>
+
+    <div class="side-block">
+      <h4 class="side-block-head">Posts</h4>
+      <div class="side-block-body" id="sidebar-recent-posts"></div>
+    </div>
+
+  </div>
+
+</div>
