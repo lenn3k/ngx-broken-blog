@@ -1,15 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
-html{
-  height: 100vh;
+html, body{
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  margin: 0;
 }
+
+html{min-height:100%;position:relative;}
+
 
 body{
   font: 400 0.8rem "Open Sans", Arial, Helvetica, sans-serif;
   color: #46494f;
-  min-height: 100vh;
 }
 
 
 .text-grey{
   color: #8d939e !important;
+
+  a{
+    color: #8d939e !important;
+
+  }
+
+  a:hover {
+
+    color: #bdc3ce !important;
+
+  }
+  a:hover {
+
+    text-decoration: none !important;
+
+  }
 }
+
+
+

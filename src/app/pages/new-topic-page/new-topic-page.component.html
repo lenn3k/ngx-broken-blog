@@ -1,0 +1,20 @@
+<div class="container h-100">
+
+  <h3 class="text-grey font-weight-light">Create a new topic</h3>
+  <form novalidate [formGroup]="newTopicForm">
+    <div class="form-group">
+      <label class="font-weight-bold text-warning" for="topic-title"><h5>Title</h5></label>
+      <input id="topic-title" name="title" type="text" class="form-control" formControlName="topicTitle">
+      <small *ngIf="newTopicForm.get('topicTitle').errors" class="form-text text-danger">This field is required</small>
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold text-warning" for="topic-description"><h5>Description</h5></label>
+      <textarea class="form-control" id="topic-description" rows="5" formControlName="topicDescription"></textarea>
+      <small *ngIf="newTopicForm.get('topicDescription').errors" class="form-text text-danger">This field is required</small>
+    </div>
+
+    <button class="btn btn-outline-warning" (click)="submitNewTopic()">Create topic</button>
+  </form>
+
+</div>

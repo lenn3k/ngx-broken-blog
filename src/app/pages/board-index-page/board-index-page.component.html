@@ -1,93 +1,61 @@
-<div class="container d-flex flex-row flex-nowrap">
 
-  <div class="forum-list mr-2 w-100">
 
-    <div class="mb-2">
+
+<div class="container d-flex flex-row flex-nowrap h-100">
+
+  <div class="forum-list mr-2 w-100" *ngIf="topicList && topicList.length > 0; else noTopics">
+
+
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i class="fas fa-plus-circle"></i> create new topic</button>
+    <div class="mb-2" >
       <div class="bg-dark" style="min-height: 60px; border-radius: 3px 3px 0 0">
         <span class="text-light px-4 mb-0" style="line-height: 60px;">Main</span>
       </div>
 
       <ul class="post-list px-4">
 
-        <li class="d-flex flex-row flex-nowrap py-3">
+        <li class="d-flex flex-row flex-nowrap py-3" *ngFor="let topic of topicList">
 
           <div class="mr-auto">
-            <a href="#" class="forum-title">Informations</a>
-            <br/><span class="text-grey">Everything you should know.</span>
-            <div class="responsive-show" style="display: none;">
-              Topics: <strong>2</strong>
-            </div>
+            <a href="#" class="forum-title">{{topic?.title}}</a>
+            <br/><span class="text-grey">{{topic?.description}}</span>
           </div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">2<br/>posts</div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">2<br/>comments</div>
-
-          <div style="width: 250px;" class="text-right d-none d-sm-block">
-            <a href="#" title="Welcome">Welcome</a> <br/>
-
-          by <a href="#" style="color: #AA0000;"
-                class="username-coloured">Gramziu</a>
-          24 Feb 2015, 21:50
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">{{topic?.posts?.length}}<br/>posts</div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">{{getCommentsForTopic(topic)}}<br/>comments
           </div>
+
+          <div style="width: 250px;" class="text-right d-none d-sm-block" *ngIf="topic && topic.posts && topic.posts.length > 0; else noPosts">
+            <a href="#" title="{{topic.posts[0].title}}">{{topic.posts[0].title}}</a> <br/>
+
+            by <a href="#" class="text-grey">{{topic.posts[0].author}}</a>
+            24 Feb 2015, 21:50 {{topic.posts[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
+          </div>
+
+
+          <ng-template #noPosts> <div style="width: 250px;" class="text-right d-none d-sm-block text-grey">
+            There are no posts yet
+          </div>
+          </ng-template>
 
 
         </li>
-        <li class="d-flex flex-row flex-nowrap py-3">
-
-          <div class="mr-auto">
-            <a href="#" class="forum-title">Informations</a>
-            <br/><span class="text-grey">Everything you should know.</span>
-            <div class="responsive-show" style="display: none;">
-              Topics: <strong>2</strong>
-            </div>
-          </div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>posts</div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>comments</div>
-
-          <div style="width: 250px;" class="text-right">
-            <a href="#" title="Welcome">Welcome</a> <br/>
-
-          by <a href="#" style="color: #AA0000;"
-                class="username-coloured">Gramziu</a>
-          24 Feb 2015, 21:50
-          </div>
-
-
-        </li>
-        <li class="d-flex flex-row flex-nowrap py-3">
-
-          <div class="mr-auto">
-            <a href="#" class="forum-title">Informations</a>
-            <br/><span class="text-grey">Everything you should know.</span>
-            <div class="responsive-show" style="display: none;">
-              Topics: <strong>2</strong>
-            </div>
-          </div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>posts</div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light">2<br/>comments</div>
-
-          <div style="width: 250px;" class="text-right">
-            <a href="#" title="Welcome">Welcome</a> <br/>
-
-          by <a href="#" style="color: #AA0000;"
-                class="username-coloured">Gramziu</a>
-          24 Feb 2015, 21:50
-          </div>
-
-
-        </li>
-
-
-
-
-
-
-
       </ul>
 
     </div>
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i class="fas fa-plus-circle"></i> create new topic</button>
+
 
 
   </div>
+
+
+  <ng-template #noTopics><div class="forum-list mr-2 w-100" >
+    <p>There are no topics</p>
+
+      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i class="fas fa-plus-circle"></i> create new topic</button>
+  </div> </ng-template>
+
+
 
   <div class="sidebar d-lg-block d-none">
 
@@ -96,32 +64,39 @@
     </div>
 
     <div class="side-block side-login">
-      <form method="post" action="./ucp.php?style=5&amp;mode=login">
-        <h4 class="side-block-head"><a href="./ucp.php?style=5&amp;mode=login">Login</a>&nbsp; &bull; &nbsp;<a
-          href="./ucp.php?style=5&amp;mode=register">Register</a></h4>
-        <div class="side-block-body">
+      <form>
+        <h6 class="m-3 mb-1 text-grey font-weight-light text-uppercase">
+          <a class="text-grey" href="#">Login</a>
+          &nbsp; &bull; &nbsp;
+          <a class="text-grey" href="#">Register</a>
+        </h6>
+        <div class="m-3 text-grey">
           <fieldset>
-            <input type="text" tabindex="1" name="username" id="username" size="10" class="inputbox"
-                   title="Username" placeholder="Username"/><input type="password" tabindex="2" name="password"
-                                                                   id="password" size="10" class="inputbox"
-                                                                   title="Password" placeholder="Password"
-                                                                   autocomplete="off"/>
+            <input type="text" tabindex="1" name="username"
+                   id="username" size="10" class="form-control mb-2 "
+                   title="Username" placeholder="Username"/>
+            <input type="password" tabindex="2" name="password"
+                   id="password" size="10" class="form-control "
+                   title="Password" placeholder="Password"
+                   autocomplete="off"/>
             <br/>
-            <a href="./ucp.php?style=5&amp;mode=sendpassword">I forgot my password</a>
-            <label for="autologin" id="remember-me"><input type="checkbox" tabindex="4" name="autologin"
-                                                           id="autologin"/>Remember me</label>
+            <a href="#">I forgot my password</a>
+            <label for="autologin" id="remember-me">
+              <input type="checkbox" tabindex="4"
+                     name="autologin" id="autologin" class="mr-2"/>
+              Remember me</label>
             <br/>
-            <input type="submit" tabindex="5" name="login" value="Login" class="button2"/>
-            <input type="hidden" name="redirect" value="./index.php?style=5&amp;style=5"/>
-
+            <input type="submit" tabindex="5" name="login" value="Login" class="btn btn-outline-warning"/>
           </fieldset>
         </div>
       </form>
     </div>
 
     <div class="side-block">
-      <h4 class="side-block-head">Posts</h4>
-      <div class="side-block-body" id="sidebar-recent-posts"></div>
+      <h6 class="text-grey text-uppercase m-3 mb-1 font-weight-light">Posts</h6>
+      <div class="mx-3 mb-2">
+        There were no recent posts
+      </div>
     </div>
 
   </div>
