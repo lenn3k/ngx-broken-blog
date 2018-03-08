@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewTopicPageComponent } from './new-topic-page.component';
+import { NewTopicPageComponent } from './topic-edit-page.component';
 
 describe('NewTopicPageComponent', () => {
   let component: NewTopicPageComponent;

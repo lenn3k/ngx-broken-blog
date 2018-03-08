@@ -1,0 +1,79 @@
+<div class="wrapper mb-4">
+
+  <div class="container d-flex flex-nowrap flex-row">
+    <h2 class="my-3 font-weight-light">{{topic?.title}}</h2>
+
+    <div class="ml-auto my-auto">
+      <button class="btn-sm btn-outline-warning" [routerLink]="['./','edit']"><i class="far fa-edit"></i> edit</button>
+      <button class="btn-sm btn-outline-warning" (click)="deleteTopic()"><i class="far fa-trash-alt"></i> delete
+      </button>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="container">
+
+  <div class="forum-list mr-2 w-100" *ngIf="topic?.posts && topic?.posts.length > 0; else noPosts">
+
+
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
+      class="fas fa-plus-circle"></i> create new post
+    </button>
+    <div class="mb-2">
+      <div class="bg-dark" style="min-height: 60px; border-radius: 3px 3px 0 0">
+        <span class="text-light px-4 mb-0" style="line-height: 60px;">Topics</span>
+      </div>
+
+      <ul class="post-list px-4">
+
+        <li class="d-flex flex-row flex-nowrap py-3" *ngFor="let post of topic?.posts">
+
+          <div class="mr-auto" style="max-width: 450px">
+            <a [routerLink]="['./','post',post.id]" class="text-dark font-weight-bold">{{post.title}}</a>
+            <br/><span class="text-grey">by {{post.author}} <i class="fas fa-angle-double-right"></i> {{post.creationTime | date:'dd MMM yyyy, HH:mm'}}
+</span>
+          </div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">
+            {{post.comments.length}}<br/>comments
+          </div>
+
+          <div style="width: 250px;" class="text-right d-none d-sm-block"
+               *ngIf="post && post.comments && post.comments.length > 0; else noComments">
+            last comment by <a href="#" class="text-grey">{{post.posts[0].author}}</a>
+            {{post.comments[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
+          </div>
+
+
+          <ng-template #noComments>
+            <div style="width: 250px;" class="text-right d-none d-sm-block text-grey">
+              There are no comments
+            </div>
+          </ng-template>
+
+
+        </li>
+      </ul>
+
+    </div>
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
+      class="fas fa-plus-circle"></i> create new post
+    </button>
+
+
+  </div>
+
+
+  <ng-template #noPosts>
+    <div class="forum-list mr-2 w-100">
+      <p>There are no posts</p>
+
+      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
+        class="fas fa-plus-circle"></i> create new post
+      </button>
+    </div>
+  </ng-template>
+
+
+</div>

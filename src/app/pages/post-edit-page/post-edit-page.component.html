@@ -1,0 +1,20 @@
+<div class="container h-100">
+
+  <h3 class="text-grey font-weight-light">Create post</h3>
+  <form novalidate [formGroup]="newPostForm">
+    <div class="form-group">
+      <label class="font-weight-bold text-warning" for="post-title"><h5>Title</h5></label>
+      <input id="post-title" name="title" type="text" class="form-control" formControlName="postTitle">
+      <small *ngIf="newPostForm.get('postTitle').errors" class="form-text text-danger">This field is required</small>
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold text-warning" for="post-description"><h5>Body</h5></label>
+      <textarea class="form-control" id="post-description" rows="5" formControlName="postBody"></textarea>
+      <small *ngIf="newPostForm.get('postBody').errors" class="form-text text-danger">This field is required</small>
+    </div>
+
+    <button class="btn btn-outline-warning" (click)="submitPost()">Submit post</button>
+  </form>
+
+</div>

@@ -9,15 +9,21 @@ import {TopicService} from './shared/services/topic.service';
 import {PostService} from './shared/services/post.service';
 import {CommentService} from './shared/services/comment.service';
 import {HttpClientModule} from '@angular/common/http';
-import { NewTopicPageComponent } from './pages/new-topic-page/new-topic-page.component';
+import {TopicEditPageComponent} from './pages/topic-edit-page/topic-edit-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {TopicPageComponent} from './pages/topic-page/topic-page.component';
+import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
+import { PostPageComponent } from './pages/post-page/post-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardIndexPageComponent,
-    NewTopicPageComponent
+    TopicEditPageComponent,
+    TopicPageComponent,
+    PostEditPageComponent,
+    PostPageComponent
   ],
   imports: [
     BrowserModule,

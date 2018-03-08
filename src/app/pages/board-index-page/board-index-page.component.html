@@ -1,13 +1,12 @@
-
-
-
-<div class="container d-flex flex-row flex-nowrap h-100">
+<div class="container d-flex flex-row flex-nowrap">
 
   <div class="forum-list mr-2 w-100" *ngIf="topicList && topicList.length > 0; else noTopics">
 
 
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i class="fas fa-plus-circle"></i> create new topic</button>
-    <div class="mb-2" >
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+      class="fas fa-plus-circle"></i> create new topic
+    </button>
+    <div class="mb-2">
       <div class="bg-dark" style="min-height: 60px; border-radius: 3px 3px 0 0">
         <span class="text-light px-4 mb-0" style="line-height: 60px;">Main</span>
       </div>
@@ -16,25 +15,33 @@
 
         <li class="d-flex flex-row flex-nowrap py-3" *ngFor="let topic of topicList">
 
-          <div class="mr-auto">
-            <a href="#" class="forum-title">{{topic?.title}}</a>
+          <div class="mr-auto" style="max-width: 350px">
+            <a [routerLink]="['','topic',topic?.id]" class="font-weight-bold text-dark">{{topic?.title}}</a>
             <br/><span class="text-grey">{{topic?.description}}</span>
           </div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">{{topic?.posts?.length}}<br/>posts</div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">{{getCommentsForTopic(topic)}}<br/>comments
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">
+            {{topic?.posts?.length}}<br/>posts
+          </div>
+          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">
+            {{getCommentsForTopic(topic)}}<br/>comments
           </div>
 
-          <div style="width: 250px;" class="text-right d-none d-sm-block" *ngIf="topic && topic.posts && topic.posts.length > 0; else noPosts">
-            <a href="#" title="{{topic.posts[0].title}}">{{topic.posts[0].title}}</a> <br/>
+          <div style="width: 250px;" class="text-right d-none d-sm-block"
+               *ngIf="topic && topic.posts && topic.posts.length > 0; else noPosts">
+            <a [routerLink]="['','topic',topic?.id,'post',topic.posts.reverse()[0].id]"
+               title="{{topic.posts.reverse()[0].title}}"
+            class="text-dark font-weight-bold">
+              {{topic.posts.reverse()[0].title}}</a> <br/>
 
-            by <a href="#" class="text-grey">{{topic.posts[0].author}}</a>
-            24 Feb 2015, 21:50 {{topic.posts[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
+            by <a class="text-grey">{{topic.posts.reverse()[0].author}}</a>
+            {{topic.posts.reverse()[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
           </div>
 
 
-          <ng-template #noPosts> <div style="width: 250px;" class="text-right d-none d-sm-block text-grey">
-            There are no posts yet
-          </div>
+          <ng-template #noPosts>
+            <div style="width: 250px;" class="text-right d-none d-sm-block text-grey">
+              There are no posts yet
+            </div>
           </ng-template>
 
 
@@ -42,19 +49,22 @@
       </ul>
 
     </div>
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i class="fas fa-plus-circle"></i> create new topic</button>
-
-
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+      class="fas fa-plus-circle"></i> create new topic
+    </button>
 
   </div>
 
 
-  <ng-template #noTopics><div class="forum-list mr-2 w-100" >
-    <p>There are no topics</p>
+  <ng-template #noTopics>
+    <div class="forum-list mr-2 w-100">
+      <p>There are no topics</p>
 
-      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i class="fas fa-plus-circle"></i> create new topic</button>
-  </div> </ng-template>
-
+      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+        class="fas fa-plus-circle"></i> create new topic
+      </button>
+    </div>
+  </ng-template>
 
 
   <div class="sidebar d-lg-block d-none">

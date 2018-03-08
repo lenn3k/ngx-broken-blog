@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TopicService} from '../../shared/services/topic.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Topic} from '../../shared/models/topic.model';
+import {Post} from '../../shared/models/post.model';
 
 @Component({
   selector: 'app-board-index-page',
@@ -12,6 +13,7 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
 
   private subs: Subscription[] = [];
   public topicList: Topic[] = [];
+  public postList: Post[] = [];
 
   constructor(private ts: TopicService) {
   }
