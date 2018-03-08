@@ -1,11 +1,11 @@
 <div class="wrapper mb-4">
 
   <div class="container d-flex flex-nowrap flex-row">
-    <h2 class="my-3 font-weight-light">{{topic?.title}}</h2>
+    <h2 class="my-3 font-weight-light">{{post?.title}}</h2>
 
     <div class="ml-auto my-auto">
-      <button class="btn-sm btn-outline-warning" [routerLink]="['./','edit']"><i class="far fa-edit"></i> edit</button>
-      <button class="btn-sm btn-outline-warning" (click)="deleteTopic()"><i class="far fa-trash-alt"></i> delete
+      <button class="btn-sm btn-outline-warning" (click)="editPost()"><i class="far fa-edit"></i> edit</button>
+      <button class="btn-sm btn-outline-warning" (click)="deletePost()"><i class="far fa-trash-alt"></i> delete
       </button>
     </div>
   </div>
@@ -13,67 +13,62 @@
 
 </div>
 
-<div class="container">
-
-  <div class="forum-list mr-2 w-100" *ngIf="topic?.posts && topic?.posts.length > 0; else noPosts">
+<div class="container d-flex flex-column flex-nowrap">
 
 
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
-      class="fas fa-plus-circle"></i> create new post
-    </button>
-    <div class="mb-2">
-      <div class="bg-dark" style="min-height: 60px; border-radius: 3px 3px 0 0">
-        <span class="text-light px-4 mb-0" style="line-height: 60px;">Topics</span>
-      </div>
-
-      <ul class="post-list px-4">
-
-        <li class="d-flex flex-row flex-nowrap py-3" *ngFor="let post of topic?.posts">
-
-          <div class="mr-auto" style="max-width: 450px">
-            <a [routerLink]="['./','post',post.id]" class="text-dark font-weight-bold">{{post.title}}</a>
-            <br/><span class="text-grey">by {{post.author}} <i class="fas fa-angle-double-right"></i> {{post.creationTime | date:'dd MMM yyyy, HH:mm'}}
-</span>
-          </div>
-          <div style="width: 95px;" class="text-center text-grey font-weight-light d-md-block d-none">
-            {{post.comments.length}}<br/>comments
-          </div>
-
-          <div style="width: 250px;" class="text-right d-none d-sm-block"
-               *ngIf="post && post.comments && post.comments.length > 0; else noComments">
-            last comment by <a href="#" class="text-grey">{{post.posts[0].author}}</a>
-            {{post.comments[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
-          </div>
-
-
-          <ng-template #noComments>
-            <div style="width: 250px;" class="text-right d-none d-sm-block text-grey">
-              There are no comments
-            </div>
-          </ng-template>
-
-
-        </li>
-      </ul>
-
+  <div class="post-wrapper d-flex flex-column flex-md-row flex-nowrap">
+    <div class="text-center d-flex flex-column bg-light" style="width: 200px;">
+      <p class="m-auto">{{post?.author}}</p>
     </div>
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
-      class="fas fa-plus-circle"></i> create new post
-    </button>
-
-
+    <div class="post-body w-100">
+      <div class="m-4">
+        <ul class="posts-buttons nav float-right mr-2 bg-light text-grey">
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote()" title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
+        </ul>
+        <h5>{{post?.title}}</h5>
+        <p class="text-grey">{{post?.creationTime | date:'dd MMM yyyy, HH:mm'}}</p>
+        <div class="content" [innerHTML]="post?.body"></div>
+      </div>
+    </div>
   </div>
 
 
-  <ng-template #noPosts>
-    <div class="forum-list mr-2 w-100">
-      <p>There are no posts</p>
 
-      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
-        class="fas fa-plus-circle"></i> create new post
-      </button>
+  <div class="post-wrapper d-flex flex-column flex-md-row flex-nowrap my-3"
+       *ngFor="let comment of post?.comments">
+    <div class="text-center d-flex flex-column bg-light" style="width: 200px;">
+      <p class="m-auto">{{comment.author}}</p>
     </div>
-  </ng-template>
+    <div class="post-body w-100">
+      <div class="m-4">
+        <ul class="posts-buttons nav float-right mr-2 bg-light text-grey">
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="editComment(comment)" title="Edit comment"><i class="far fa-edit"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="deleteComment(comment)" title="Delete comment"><i class="far fa-trash-alt"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote(comment)" title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
+        </ul>
+        <h5>RE: {{post.title}}</h5>
+        <p class="text-grey">{{comment?.creationTime | date:'dd MMM yyyy, HH:mm'}}</p>
+        <div *ngIf="!comment?.editing" class="content" [innerHTML]="comment?.body"></div>
+        <div *ngIf="comment?.editing" class="editing" >
+          <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="editCommentBody"></textarea>
+          <button class="btn btn-outline-warning font-weight-light mb-3" (click)="updateComment(comment)"><i
+            class="fas fa-save"></i> Save changes</button>
+          <button class="btn btn-outline-warning font-weight-light mb-3" (click)="undoChanges(comment)"><i
+            class="fas fa-undo-alt"></i> Undo changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="post-wrapper px-4 my-3 bg-light">
+    <h5 class="mt-2">Reply with a comment</h5>
+    <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="newCommentBody" placeholder="Start typing here to reply to the post"></textarea>
+    <button class="btn btn-outline-warning font-weight-light mb-3" (click)="createComment()"><i
+      class="fas fa-paper-plane"></i> Send reply
+    </button>
+  </div>
 
 
 </div>

@@ -4,6 +4,7 @@ import {BoardIndexPageComponent} from './pages/board-index-page/board-index-page
 import {TopicEditPageComponent} from './pages/topic-edit-page/topic-edit-page.component';
 import {TopicPageComponent} from './pages/topic-page/topic-page.component';
 import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
+import {PostPageComponent} from './pages/post-page/post-page.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     component: PostEditPageComponent
   },
   {
-    path: 'topic/:topicId/post/:postId'
+    path: 'topic/:topicId/post/:postId',
+    component: PostPageComponent
   }
 ];
 
