@@ -28,13 +28,13 @@
 
           <div style="width: 250px;" class="text-right d-none d-sm-block"
                *ngIf="topic && topic.posts && topic.posts.length > 0; else noPosts">
-            <a [routerLink]="['','topic',topic?.id,'post',topic.posts.reverse()[0].id]"
-               title="{{topic.posts.reverse()[0].title}}"
+            <a [routerLink]="['','topic',topic.id,'post',topic.posts[topic.posts.length-1].id]"
+               title="{{topic.posts[topic.posts.length-1].title}}"
             class="text-dark font-weight-bold">
-              {{topic.posts.reverse()[0].title}}</a> <br/>
+              {{topic.posts[topic.posts.length-1].title}}</a> <br/>
 
             by <a class="text-grey">{{topic.posts.reverse()[0].author}}</a>
-            {{topic.posts.reverse()[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
+            {{topic.posts[topic.posts.length-1].creationTime | date:'dd MMM yyyy, HH:mm'}}
           </div>
 
 
@@ -103,10 +103,20 @@
     </div>
 
     <div class="side-block">
-      <h6 class="text-grey text-uppercase m-3 mb-1 font-weight-light">Posts</h6>
+      <h6 class="text-grey text-uppercase m-3 mb-1 font-weight-light">Recent Posts</h6>
+
+      <div class="mx-3 mb-2 d-flex flex-column flex flex-nowrap"
+           *ngFor="let post of postList">
+        <span class="font-weight-bold">{{post.title}}</span>
+        <span class="text-grey">by {{post.author}}</span>
+        <span class="sidebar-recent-content">{{post.body.slice(0,50)}}{{post.body.length>50?'...':''}}</span>
+      </div>
+
+      <ng-template #noPosts>
       <div class="mx-3 mb-2">
         There were no recent posts
       </div>
+      </ng-template>
     </div>
 
   </div>

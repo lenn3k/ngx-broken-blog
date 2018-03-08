@@ -3,6 +3,7 @@ import {TopicService} from '../../shared/services/topic.service';
 import {Subscription} from 'rxjs/Subscription';
 import {Topic} from '../../shared/models/topic.model';
 import {Post} from '../../shared/models/post.model';
+import {PostService} from '../../shared/services/post.service';
 
 @Component({
   selector: 'app-board-index-page',
@@ -15,13 +16,22 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
   public topicList: Topic[] = [];
   public postList: Post[] = [];
 
-  constructor(private ts: TopicService) {
+  constructor(private ts: TopicService,
+              private ps: PostService) {
   }
 
   ngOnInit() {
     this.subs.push(this.ts.getAllTopics().subscribe(
       result => {
         this.topicList = result;
+      },
+      error => {
+        throw error;
+      }));
+
+    this.subs.push(this.ps.getAllPosts().subscribe(
+      result => {
+        this.postList = result.reverse().slice(0,5);
       },
       error => {
         throw error;

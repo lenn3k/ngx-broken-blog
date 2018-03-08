@@ -10,6 +10,10 @@ export class PostService {
   constructor(private http: HttpClient) {
   }
 
+  getAllPosts() {
+    return this.http.get<Post[]>(`${environment.backEndUrl}/posts/`);
+
+  }
 
   getPostById(id: string) {
     return this.http.get<Post>(`${environment.backEndUrl}/posts/${id}`);
