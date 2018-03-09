@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  currentDate: Date = new Date();
+
+  constructor(){
+    setInterval(() => {
+      this.currentDate = new Date();
+    }, 30000);
+  }
 }

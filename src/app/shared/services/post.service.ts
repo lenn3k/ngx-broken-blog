@@ -35,4 +35,8 @@ export class PostService {
     return this.http.put(`${environment.backEndUrl}/posts/${postId}/comments`, tempComment);
 
   }
+
+  updatePost(tempPost: Post) {
+    return this.http.put(`${environment.backEndUrl}/posts/${tempPost.id}`,tempPost);
+  }
 }

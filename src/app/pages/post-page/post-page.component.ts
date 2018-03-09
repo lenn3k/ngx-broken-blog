@@ -18,7 +18,10 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   public post: Post;
   public newCommentBody = '';
-  private editCommentBody: string;
+  public editing: boolean;
+  public editCommentBody: string;
+  public editPostBody: string;
+  public editPostTitle: string;
 
   constructor(private ps: PostService,
               private route: ActivatedRoute,
@@ -47,7 +50,9 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   editPost() {
-
+    this.editing = !this.editing;
+    this.editPostBody = this.post.body;
+    this.editPostTitle = this.post.title;
   }
 
 
@@ -94,6 +99,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
         post => {
           this.post = post;
           this.newCommentBody = '';
+          this.editing = false;
         },
         error => console.log(error)
       ));
@@ -101,7 +107,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   updateComment(comment: Comment) {
     const tempComment: Comment = {};
-    Object.assign(tempComment,comment)
+    Object.assign(tempComment, comment);
     tempComment.body = this.editCommentBody;
     this.subs.push(this.ps.updateCommentForPostId(this.postId, tempComment)
       .subscribe(
@@ -111,5 +117,17 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   undoChanges(comment: Comment) {
     comment['editing'] = false;
+    this.editing = false;
+  }
+
+  updatePost() {
+    const tempPost: Post = {};
+    Object.assign(tempPost, this.post);
+    tempPost.body = this.editPostBody;
+    tempPost.title = this.editPostTitle;
+    this.subs.push(this.ps.updatePost(tempPost)
+      .subscribe(
+        () => this.refreshPost(),
+        error => console.log(error)));
   }
 }

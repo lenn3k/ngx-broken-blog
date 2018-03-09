@@ -4,19 +4,19 @@
   <a id="to-the-top" class="anchor" accesskey="t"></a>
   <div id="wrap-head">
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-2">
       <div class="container d-flex flex-row">
         <a class="navbar-brand site-logo mx-auto" href="/" title="Board index"></a>
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="./ucp.php?style=5&amp;mode=login" title="Login" accesskey="x"><i
+              <a class="nav-link" href="#" title="Login" accesskey="x"><i
                 class="fa fa-power-off"></i>
                 <span class="nav-rh-2">Login</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./ucp.php?style=5&amp;mode=register"><i
+              <a class="nav-link" href="#"><i
                 class="far fa-edit"></i>
                 <span class="nav-rh-2">Register</span>
               </a>
@@ -26,36 +26,6 @@
 
       </div>
     </nav>
-  </div>
-
-  <div class="navbar navbar-light bg-white">
-    <div class="container flex-nowrap">
-
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link"><i class="fa fa-bars"></i></a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item">
-              <i class="far fa-file"></i> Unanswered posts</a>
-            <a class="dropdown-item">
-              <i class="fa fa-fire"></i> Active topics
-            </a>
-            <div class="dropdown-divider d-md-none"></div>
-
-
-            <a class="dropdown-item d-md-none" title="Login">
-              <i class="fa fa-power-off"></i> Login
-            </a>
-            <a class="dropdown-item d-md-none" title="Register">
-              <i class="far fa-edit"></i> Register
-            </a>
-
-          </div>
-        </li>
-
-
-      </ul>
-    </div>
   </div>
 
 
@@ -109,7 +79,7 @@
       <div class="foot-right w-100">
         <ul class="navbar-nav text-right text-grey">
           <li class="mb-3">All times are <abbr title="UTC">UTC</abbr></li>
-          <li>It is currently 05 Mar 2018, 07:40</li>
+          <li>It is currently {{currentDate | date:'dd MMM yyyy, HH:mm'}}</li>
         </ul>
       </div>
 

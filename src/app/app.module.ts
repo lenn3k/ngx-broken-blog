@@ -7,13 +7,12 @@ import {BoardIndexPageComponent} from './pages/board-index-page/board-index-page
 import {AppRoutes} from './app.routes';
 import {TopicService} from './shared/services/topic.service';
 import {PostService} from './shared/services/post.service';
-import {CommentService} from './shared/services/comment.service';
 import {HttpClientModule} from '@angular/common/http';
 import {TopicEditPageComponent} from './pages/topic-edit-page/topic-edit-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TopicPageComponent} from './pages/topic-page/topic-page.component';
 import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
-import { PostPageComponent } from './pages/post-page/post-page.component';
+import {PostPageComponent} from './pages/post-page/post-page.component';
 
 
 @NgModule({
@@ -35,7 +34,7 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
   providers: [
     TopicService,
     PostService,
-    CommentService],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

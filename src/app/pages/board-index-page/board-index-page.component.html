@@ -31,9 +31,11 @@
             <a [routerLink]="['','topic',topic.id,'post',topic.posts[topic.posts.length-1].id]"
                title="{{topic.posts[topic.posts.length-1].title}}"
             class="text-dark font-weight-bold">
-              {{topic.posts[topic.posts.length-1].title}}</a> <br/>
+              {{topic.posts[topic.posts.length-1].title}}</a>
+            <br/>
 
             by <a class="text-grey">{{topic.posts.reverse()[0].author}}</a>
+            <br/>
             {{topic.posts[topic.posts.length-1].creationTime | date:'dd MMM yyyy, HH:mm'}}
           </div>
 
