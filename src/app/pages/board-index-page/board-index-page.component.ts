@@ -23,7 +23,11 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subs.push(this.ts.getAllTopics().subscribe(
       result => {
-        this.topicList = result;
+        this.topicList = result.map(topic => {
+          console.log('return')
+          topic.posts = topic.posts.reverse();
+          return topic;
+        });
       },
       error => {
         throw error;
@@ -31,7 +35,7 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
 
     this.subs.push(this.ps.getAllPosts().subscribe(
       result => {
-        this.postList = result.reverse().slice(0,5);
+        this.postList = result.reverse().slice(0, 5);
       },
       error => {
         throw error;

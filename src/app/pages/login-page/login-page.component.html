@@ -1,0 +1,31 @@
+<div class="container d-flex flex-row flex-nowrap">
+  <div class="side-block side-login m-auto" style="width: 250px;">
+  <form novalidate [formGroup]="loginForm">
+    <h6 class="m-3 mb-1 text-grey font-weight-light text-uppercase">
+      Login
+    </h6>
+    <div class="m-3 text-grey">
+      <fieldset>
+        <input type="text" tabindex="1" name="username"
+               id="username" class="form-control mb-2 "
+               title="Username" placeholder="Username" formControlName="loginUsername"/>
+        <small *ngIf="loginForm.get('loginUsername').errors" class="form-text text-danger">This field is required</small>
+        <input type="password" tabindex="2" name="password"
+               id="password" class="form-control "
+               title="Password" placeholder="Password"
+               autocomplete="off" formControlName="loginPassword"/>
+        <small *ngIf="loginForm.get('loginPassword').errors" class="form-text text-danger">This field is required</small>
+        <br/>
+        <a href="#">I forgot my password</a>
+        <br/>
+        <label for="autologin" id="remember-me">
+          <input type="checkbox" tabindex="4"
+                 name="autologin" id="autologin" class="mr-2" formControlName="loginRemember"/>
+          Remember me</label>
+        <br/>
+        <input type="submit" tabindex="5" name="login" value="Login" class="btn btn-outline-warning"/>
+      </fieldset>
+    </div>
+  </form>
+</div>
+</div>

@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TopicPageComponent} from './pages/topic-page/topic-page.component';
 import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
 import {PostPageComponent} from './pages/post-page/post-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {PostPageComponent} from './pages/post-page/post-page.component';
     TopicEditPageComponent,
     TopicPageComponent,
     PostEditPageComponent,
-    PostPageComponent
+    PostPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

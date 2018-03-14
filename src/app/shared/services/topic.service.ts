@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Topic} from '../models/topic.model';
 import {Post} from '../models/post.model';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class TopicService {
@@ -10,7 +11,7 @@ export class TopicService {
   constructor(private http: HttpClient) {
   }
 
-  getAllTopics() {
+  getAllTopics(): Observable<Topic[]> {
     return this.http.get<Topic[]>(`${environment.backEndUrl}/topics`);
   }
 

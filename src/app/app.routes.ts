@@ -5,6 +5,7 @@ import {TopicEditPageComponent} from './pages/topic-edit-page/topic-edit-page.co
 import {TopicPageComponent} from './pages/topic-page/topic-page.component';
 import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
 import {PostPageComponent} from './pages/post-page/post-page.component';
+import {LoginPageComponent} from './pages/login-page/login-page.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'topic/:topicId/post/:postId',
     component: PostPageComponent
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent
   }
 ];
 

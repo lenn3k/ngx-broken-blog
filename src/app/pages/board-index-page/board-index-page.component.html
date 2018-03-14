@@ -28,15 +28,15 @@
 
           <div style="width: 250px;" class="text-right d-none d-sm-block"
                *ngIf="topic && topic.posts && topic.posts.length > 0; else noPosts">
-            <a [routerLink]="['','topic',topic.id,'post',topic.posts[topic.posts.length-1].id]"
-               title="{{topic.posts[topic.posts.length-1].title}}"
+            <a [routerLink]="['','topic',topic.id,'post',topic?.posts[0].title]"
+               title="{{topic.posts[0].title}}"
             class="text-dark font-weight-bold">
-              {{topic.posts[topic.posts.length-1].title}}</a>
+              {{topic.posts[0].title}}</a>
             <br/>
 
-            by <a class="text-grey">{{topic.posts.reverse()[0].author}}</a>
+            by <a class="text-grey">{{topic.posts[0].author}}</a>
             <br/>
-            {{topic.posts[topic.posts.length-1].creationTime | date:'dd MMM yyyy, HH:mm'}}
+            {{topic.posts[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
           </div>
 
 
@@ -78,7 +78,7 @@
     <div class="side-block side-login">
       <form>
         <h6 class="m-3 mb-1 text-grey font-weight-light text-uppercase">
-          <a class="text-grey" href="#">Login</a>
+          <a class="text-grey" [routerLink]="['/login']">Login</a>
           &nbsp; &bull; &nbsp;
           <a class="text-grey" href="#">Register</a>
         </h6>
