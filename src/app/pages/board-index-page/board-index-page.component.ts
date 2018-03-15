@@ -24,7 +24,6 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ts.getAllTopics().subscribe(
       result => {
         this.topicList = result.map(topic => {
-          console.log('return')
           topic.posts = topic.posts.reverse();
           return topic;
         });

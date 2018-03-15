@@ -28,7 +28,7 @@
 
           <div style="width: 250px;" class="text-right d-none d-sm-block"
                *ngIf="topic && topic.posts && topic.posts.length > 0; else noPosts">
-            <a [routerLink]="['','topic',topic.id,'post',topic?.posts[0].title]"
+            <a [routerLink]="['','topic',topic.id,'post',topic.posts[0].id]"
                title="{{topic.posts[0].title}}"
             class="text-dark font-weight-bold">
               {{topic.posts[0].title}}</a>

@@ -42,7 +42,7 @@
           <div style="width: 250px;" class="text-right d-none d-sm-block"
                *ngIf="post && post.comments && post.comments.length > 0; else noComments">
             last comment <br/>
-            by <a href="#" class="text-grey">{{post.comments[0].author}}</a> <br/>
+            by <a class="text-grey">{{post.comments[0].author}}</a> <br/>
             {{post.comments[0].creationTime | date:'dd MMM yyyy, HH:mm'}}
           </div>
 
