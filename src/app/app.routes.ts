@@ -6,6 +6,7 @@ import {TopicPageComponent} from './pages/topic-page/topic-page.component';
 import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
 import {PostPageComponent} from './pages/post-page/post-page.component';
 import {LoginPageComponent} from './pages/login-page/login-page.component';
+import {AuthGuard} from './shared/auth/auth.guard.service';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'new-topic',
-    component: TopicEditPageComponent
+    component: TopicEditPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'topic/:id',
@@ -22,11 +24,13 @@ const routes: Routes = [
   },
   {
     path: 'topic/:id/edit',
-    component: TopicEditPageComponent
+    component: TopicEditPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'topic/:id/new-post',
-    component: PostEditPageComponent
+    component: PostEditPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'topic/:topicId/post/:postId',

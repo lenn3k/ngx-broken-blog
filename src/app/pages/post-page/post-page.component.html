@@ -3,9 +3,9 @@
   <div class="container d-flex flex-nowrap flex-row">
     <h2 class="my-3 font-weight-light">{{post?.title}}</h2>
 
-    <div class="ml-auto my-auto">
-      <button class="btn-sm btn-outline-warning" (click)="editPost()"><i class="far fa-edit"></i> edit</button>
-      <button class="btn-sm btn-outline-warning" (click)="deletePost()"><i class="far fa-trash-alt"></i> delete
+    <div class="ml-auto my-auto" *ngIf="loggedIn()">>
+      <button class="btn-sm btn-outline-warning" (click)="editPost()" *ngIf="loggedIn()"><i class="far fa-edit"></i> edit</button>
+      <button class="btn-sm btn-outline-warning" (click)="deletePost()" *ngIf="loggedIn()"><i class="far fa-trash-alt"></i> delete
       </button>
     </div>
   </div>
@@ -23,7 +23,7 @@
     <div class="post-body w-100">
       <div class="m-4">
         <ul class="posts-buttons nav float-right bg-light text-grey">
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote()" title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote()" title="Reply with quote" *ngIf="loggedIn()"><i class="fas fa-quote-left"></i></a></li>
         </ul>
         <h5 *ngIf="!editing">{{post?.title}}</h5>
         <h5 *ngIf="editing"><input title="post title" [(ngModel)]="editPostTitle"></h5>
@@ -49,7 +49,7 @@
     </div>
     <div class="post-body w-100">
       <div class="m-4">
-        <ul class="posts-buttons nav float-right bg-light text-grey">
+        <ul class="posts-buttons nav float-right bg-light text-grey" *ngIf="loggedIn()">
           <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="editComment(comment)" title="Edit comment"><i class="far fa-edit"></i></a></li>
           <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="deleteComment(comment)" title="Delete comment"><i class="far fa-trash-alt"></i></a></li>
           <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote(comment)" title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
@@ -70,7 +70,7 @@
 
 
 
-  <div class="post-wrapper px-4 my-3 bg-light">
+  <div class="post-wrapper px-4 my-3 bg-light" *ngIf="loggedIn()">
     <h5 class="mt-2">Reply with a comment</h5>
     <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="newCommentBody" placeholder="Start typing here to reply to the post"></textarea>
     <button class="btn btn-outline-warning font-weight-light mb-3" (click)="createComment()"><i

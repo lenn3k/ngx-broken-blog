@@ -5,5 +5,11 @@
 
 export const environment = {
   production: false,
-  backEndUrl: '//localhost:8080/api/v1'
+  backEndUrl: '//localhost:8080/api/v1',
+  keycloak: {
+    realm: 'Brokenblog',
+    url: 'https://keycloak-jworks.origin.ordina-jworks.io/auth/realms/Brokenblog',
+    clientId: 'web_app',
+    registration: 'https://keycloak-jworks.origin.ordina-jworks.io/auth/realms/Brokenblog/login-actions/registration?client_id=web_app'
+  }
 };

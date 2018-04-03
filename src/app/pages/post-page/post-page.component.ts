@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Post} from '../../shared/models/post.model';
 import {Comment} from '../../shared/models/comment.model';
 import {PostService} from '../../shared/services/post.service';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-post-page',
@@ -25,7 +26,9 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   constructor(private ps: PostService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private oAuthService: OAuthService
+  ) {
   }
 
   ngOnInit() {
@@ -129,5 +132,9 @@ export class PostPageComponent implements OnInit, OnDestroy {
       .subscribe(
         () => this.refreshPost(),
         error => console.log(error)));
+  }
+
+  loggedIn(): boolean {
+    return this.oAuthService.hasValidAccessToken();
   }
 }

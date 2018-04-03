@@ -3,7 +3,7 @@
   <div class="forum-list mr-2 w-100" *ngIf="topicList && topicList.length > 0; else noTopics">
 
 
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']" *ngIf="loggedin()"><i
       class="fas fa-plus-circle"></i> create new topic
     </button>
     <div class="mb-2">
@@ -51,7 +51,7 @@
       </ul>
 
     </div>
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']" *ngIf="loggedin()"> <i
       class="fas fa-plus-circle"></i> create new topic
     </button>
 
@@ -62,7 +62,7 @@
     <div class="forum-list mr-2 w-100">
       <p>There are no topics</p>
 
-      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']" *ngIf="loggedin()"><i
         class="fas fa-plus-circle"></i> create new topic
       </button>
     </div>
@@ -75,22 +75,22 @@
       <img src="../assets/images/jworks-250x250.png" alt="Powered by" style="border-radius: 3px;">
     </div>
 
-    <div class="side-block side-login">
+    <div class="side-block side-login" *ngIf="!loggedin()">
       <form>
         <h6 class="m-3 mb-1 text-grey font-weight-light text-uppercase">
           <a class="text-grey" [routerLink]="['/login']">Login</a>
           &nbsp; &bull; &nbsp;
-          <a class="text-grey" href="#">Register</a>
+          <a class="text-grey" href="#" (click)="goToRegisterPage()">Register</a>
         </h6>
         <div class="m-3 text-grey">
           <fieldset>
             <input type="text" tabindex="1" name="username"
                    id="username" size="10" class="form-control mb-2 "
-                   title="Username" placeholder="Username"/>
+                   title="Username" placeholder="Username" [(ngModel)]="userName"/>
             <input type="password" tabindex="2" name="password"
                    id="password" size="10" class="form-control "
                    title="Password" placeholder="Password"
-                   autocomplete="off"/>
+                   autocomplete="off" [(ngModel)]="password"/>
             <br/>
             <a href="#">I forgot my password</a>
             <label for="autologin" id="remember-me">
@@ -98,7 +98,7 @@
                      name="autologin" id="autologin" class="mr-2"/>
               Remember me</label>
             <br/>
-            <input type="submit" tabindex="5" name="login" value="Login" class="btn btn-outline-warning"/>
+            <input type="submit" tabindex="5" name="login" value="Login" class="btn btn-outline-warning" (click)="loginWithPass()"/>
           </fieldset>
         </div>
       </form>

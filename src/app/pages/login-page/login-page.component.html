@@ -5,15 +5,18 @@
       Login
     </h6>
     <div class="m-3 text-grey">
+      <p style="color:red; font-weight:bold" *ngIf="loginFailed">
+        Login wasn't successfull.
+      </p>
       <fieldset>
         <input type="text" tabindex="1" name="username"
                id="username" class="form-control mb-2 "
-               title="Username" placeholder="Username" formControlName="loginUsername"/>
+               title="Username" placeholder="Username" formControlName="loginUsername" [(ngModel)]="userName"/>
         <small *ngIf="loginForm.get('loginUsername').errors" class="form-text text-danger">This field is required</small>
         <input type="password" tabindex="2" name="password"
                id="password" class="form-control "
                title="Password" placeholder="Password"
-               autocomplete="off" formControlName="loginPassword"/>
+               autocomplete="off" formControlName="loginPassword" [(ngModel)]="password"/>
         <small *ngIf="loginForm.get('loginPassword').errors" class="form-text text-danger">This field is required</small>
         <br/>
         <a href="#">I forgot my password</a>
@@ -23,7 +26,7 @@
                  name="autologin" id="autologin" class="mr-2" formControlName="loginRemember"/>
           Remember me</label>
         <br/>
-        <input type="submit" tabindex="5" name="login" value="Login" class="btn btn-outline-warning"/>
+        <input type="submit" tabindex="5" name="login" value="Login" class="btn btn-outline-warning" (click)="loginWithPass()"/>
       </fieldset>
     </div>
   </form>

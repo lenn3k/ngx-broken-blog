@@ -3,7 +3,7 @@
   <div class="container d-flex flex-nowrap flex-row">
     <h2 class="my-3 font-weight-light">{{topic?.title}}</h2>
 
-    <div class="ml-auto my-auto">
+    <div class="ml-auto my-auto" *ngIf="loggedIn()">
       <button class="btn-sm btn-outline-warning" [routerLink]="['./','edit']"><i class="far fa-edit"></i> edit</button>
       <button class="btn-sm btn-outline-warning" (click)="deleteTopic()"><i class="far fa-trash-alt"></i> delete
       </button>
@@ -18,8 +18,8 @@
   <div class="forum-list mr-2 w-100" *ngIf="topic?.posts && topic?.posts.length > 0; else noPosts">
 
 
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
-      class="fas fa-plus-circle"></i> create new post
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']" *ngIf="loggedIn()"><i
+      class="fas fa-plus-circle"  ></i> create new post
     </button>
     <div class="mb-2">
       <div class="bg-dark" style="min-height: 60px; border-radius: 3px 3px 0 0">
@@ -58,7 +58,7 @@
       </ul>
 
     </div>
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']"><i
+    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['./','new-post']" *ngIf="loggedIn()"><i
       class="fas fa-plus-circle"></i> create new post
     </button>
 

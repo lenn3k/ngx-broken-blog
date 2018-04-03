@@ -28,7 +28,7 @@ export class PostService {
   }
 
   deleteCommentByIdAndPostId(postId: string, commentId: string) {
-    return this.http.delete(`${environment.backEndUrl}/posts/${postId}/comments/${commentId}`,);
+    return this.http.delete(`${environment.backEndUrl}/posts/${postId}/comments/${commentId}`);
   }
 
   updateCommentForPostId(postId: string, tempComment: Comment) {
