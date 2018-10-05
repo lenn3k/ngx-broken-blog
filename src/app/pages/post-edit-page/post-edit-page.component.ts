@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TopicService} from '../../shared/services/topic.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Post} from '../../shared/models/post.model';
 
 @Component({
@@ -54,7 +54,7 @@ export class PostEditPageComponent implements OnInit, OnDestroy {
             this.router.navigate(['', 'topic', this.topicId]);
             console.log('Topic created');
           },
-          error2 => console.log(error2)));
+          error2 => console.error(error2)));
     }
   }
 }

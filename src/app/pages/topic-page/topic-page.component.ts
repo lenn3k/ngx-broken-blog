@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {TopicService} from '../../shared/services/topic.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Topic} from '../../shared/models/topic.model';
@@ -11,9 +11,9 @@ import {Topic} from '../../shared/models/topic.model';
 })
 export class TopicPageComponent implements OnInit, OnDestroy {
 
+  public topic: Topic;
   private subs: Subscription[] = [];
   private topicId: string;
-  public topic: Topic;
 
   constructor(private ts: TopicService,
               private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class TopicPageComponent implements OnInit, OnDestroy {
         this.subs.push(this.ts.getTopicById(this.topicId)
           .subscribe(
             topic => this.topic = topic,
-            error => console.log(error)));
+            error => console.error(error)));
       }));
 
   }
@@ -40,7 +40,7 @@ export class TopicPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ts.deleteTopicById(this.topic.id)
       .subscribe(
         () => this.router.navigate(['']),
-        error => console.log(error)));
+        error => console.error(error)));
   }
 
   editTopic() {

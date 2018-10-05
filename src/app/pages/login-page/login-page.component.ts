@@ -23,4 +23,15 @@ export class LoginPageComponent implements OnInit {
 
   }
 
+  login() {
+    if (this.loginForm.valid) {
+      const formRaw = this.loginForm.getRawValue();
+      const username = formRaw['loginUsername'];
+      const password = formRaw['loginPassword'];
+
+      // Do something with username and password
+    }
+  }
+
+
 }

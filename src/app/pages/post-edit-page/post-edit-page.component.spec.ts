@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PostEditPageComponent } from './post-edit-page.component';
+import {PostEditPageComponent} from './post-edit-page.component';
 
 describe('PostEditPageComponent', () => {
   let component: PostEditPageComponent;
@@ -8,9 +8,9 @@ describe('PostEditPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostEditPageComponent ]
+      declarations: [PostEditPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

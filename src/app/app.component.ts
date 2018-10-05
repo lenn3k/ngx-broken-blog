@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,23 @@ export class AppComponent {
   title = 'app';
   currentDate: Date = new Date();
 
-  constructor(){
+  constructor() {
     setInterval(() => {
       this.currentDate = new Date();
     }, 30000);
+  }
+
+  get givenName() {
+    return 'derp';
+  }
+
+  loggedIn() {
+    return false;
+  }
+
+  login() {
+  }
+
+  logout() {
   }
 }

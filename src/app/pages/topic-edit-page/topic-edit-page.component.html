@@ -11,7 +11,8 @@
     <div class="form-group">
       <label class="font-weight-bold text-warning" for="topic-description"><h5>Description</h5></label>
       <textarea class="form-control" id="topic-description" rows="5" formControlName="topicDescription"></textarea>
-      <small *ngIf="newTopicForm.get('topicDescription').errors" class="form-text text-danger">This field is required</small>
+      <small *ngIf="newTopicForm.get('topicDescription').errors" class="form-text text-danger">This field is required
+      </small>
     </div>
 
     <button class="btn btn-outline-warning" (click)="submitTopic()">{{topic?'Update':'Create'}} topic</button>

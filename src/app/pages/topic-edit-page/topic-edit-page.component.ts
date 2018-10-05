@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TopicService} from '../../shared/services/topic.service';
 import {Topic} from '../../shared/models/topic.model';
-import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -10,10 +9,9 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './topic-edit-page.component.html',
   styleUrls: ['./topic-edit-page.component.scss']
 })
-export class TopicEditPageComponent implements OnInit, OnDestroy {
+export class TopicEditPageComponent implements OnInit {
   public newTopicForm: FormGroup;
-  private subs: Subscription[] = [];
-  private topic: Topic;
+  public topic: Topic;
 
   constructor(private formBuilder: FormBuilder,
               private ts: TopicService,
@@ -27,28 +25,25 @@ export class TopicEditPageComponent implements OnInit, OnDestroy {
       topicDescription: ['', Validators.required]
     });
 
-    this.subs.push(this.route.params.subscribe(
+    this.route.params.subscribe(
       params => {
         if (params.hasOwnProperty('id')) {
-          this.subs.push(this.ts.getTopicById(params['id'])
+          this.ts.getTopicById(params['id'])
             .subscribe(
               topic => {
                 this.topic = topic;
                 this.newTopicForm.get('topicTitle').setValue(this.topic.title);
                 this.newTopicForm.get('topicDescription').setValue(this.topic.description);
               },
-              error => console.log(error)
-            ));
+              error => console.error(error)
+            );
         }
       }
-    ));
+    );
 
 
   }
 
-  ngOnDestroy(): void {
-    this.subs.forEach(value => value.unsubscribe());
-  }
 
   submitTopic() {
 
@@ -66,22 +61,22 @@ export class TopicEditPageComponent implements OnInit, OnDestroy {
 
       if (this.topic) {
         // Update existing topic
-        this.subs.push(this.ts.updateTopic(tempTopic)
+        this.ts.updateTopic(tempTopic)
           .subscribe(
             () => {
               this.router.navigate(['', 'topic', this.topic.id]);
               console.log('Topic created');
             },
-            error2 => console.log(error2)));
+            error2 => console.error(error2));
       } else {
         // Create a new topic
-        this.subs.push(this.ts.createNewTopic(tempTopic)
+        this.ts.createNewTopic(tempTopic)
           .subscribe(
             () => {
               this.router.navigate(['']);
               console.log('Topic created');
             },
-            error2 => console.log(error2)));
+            error2 => console.error(error2));
       }
 
 

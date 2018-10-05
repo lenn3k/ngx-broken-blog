@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Post} from '../../shared/models/post.model';
 import {Comment} from '../../shared/models/comment.model';
 import {PostService} from '../../shared/services/post.service';
@@ -12,16 +12,15 @@ import {PostService} from '../../shared/services/post.service';
 })
 export class PostPageComponent implements OnInit, OnDestroy {
 
-  private subs: Subscription[] = [];
-  private topicId: string;
-  private postId: string;
-
   public post: Post;
   public newCommentBody = '';
   public editing: boolean;
   public editCommentBody: string;
   public editPostBody: string;
   public editPostTitle: string;
+  private subs: Subscription[] = [];
+  private topicId: string;
+  private postId: string;
 
   constructor(private ps: PostService,
               private route: ActivatedRoute,
@@ -46,7 +45,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ps.deletePostById(this.postId)
       .subscribe(
         () => this.router.navigate(['']),
-        error => console.log(error)));
+        error => console.error(error)));
   }
 
   editPost() {
@@ -75,7 +74,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ps.deleteCommentByIdAndPostId(this.postId, comment.id.toString())
       .subscribe(
         () => this.refreshPost(),
-        error => console.log(error)));
+        error => console.error(error)));
   }
 
   editComment(comment: Comment) {
@@ -90,19 +89,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ps.createCommentForPostId(this.postId, tempComment)
       .subscribe(
         () => this.refreshPost(),
-        error => console.log(error)));
-  }
-
-  private refreshPost() {
-    this.subs.push(this.ps.getPostById(this.postId)
-      .subscribe(
-        post => {
-          this.post = post;
-          this.newCommentBody = '';
-          this.editing = false;
-        },
-        error => console.log(error)
-      ));
+        error => console.error(error)));
   }
 
   updateComment(comment: Comment) {
@@ -112,7 +99,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ps.updateCommentForPostId(this.postId, tempComment)
       .subscribe(
         () => this.refreshPost(),
-        error => console.log(error)));
+        error => console.error(error)));
   }
 
   undoChanges(comment: Comment) {
@@ -128,6 +115,18 @@ export class PostPageComponent implements OnInit, OnDestroy {
     this.subs.push(this.ps.updatePost(tempPost)
       .subscribe(
         () => this.refreshPost(),
-        error => console.log(error)));
+        error => console.error(error)));
+  }
+
+  private refreshPost() {
+    this.subs.push(this.ps.getPostById(this.postId)
+      .subscribe(
+        post => {
+          this.post = post;
+          this.newCommentBody = '';
+          this.editing = false;
+        },
+        error => console.error(error)
+      ));
   }
 }

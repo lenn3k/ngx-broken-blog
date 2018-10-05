@@ -1,27 +1,34 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TopicService} from '../../shared/services/topic.service';
-import {Subscription} from 'rxjs/Subscription';
 import {Topic} from '../../shared/models/topic.model';
 import {Post} from '../../shared/models/post.model';
 import {PostService} from '../../shared/services/post.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-board-index-page',
   templateUrl: './board-index-page.component.html',
   styleUrls: ['./board-index-page.component.scss']
 })
-export class BoardIndexPageComponent implements OnInit, OnDestroy {
+export class BoardIndexPageComponent implements OnInit {
 
-  private subs: Subscription[] = [];
   public topicList: Topic[] = [];
   public postList: Post[] = [];
+  public loginForm: FormGroup;
 
   constructor(private ts: TopicService,
-              private ps: PostService) {
+              private ps: PostService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.subs.push(this.ts.getAllTopics().subscribe(
+    this.loginForm = this.fb.group({
+      loginUsername: ['', Validators.required],
+      loginPassword: ['', Validators.required],
+      loginRemember: false
+    });
+
+    this.ts.getAllTopics().subscribe(
       result => {
         this.topicList = result.map(topic => {
           topic.posts = topic.posts.reverse();
@@ -29,21 +36,18 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
         });
       },
       error => {
-        throw error;
-      }));
+        console.error(error);
+      });
 
-    this.subs.push(this.ps.getAllPosts().subscribe(
+    this.ps.getAllPosts().subscribe(
       result => {
-        this.postList = result.reverse().slice(0, 5);
+        this.postList = result.reverse().slice(0, 7);
       },
       error => {
-        throw error;
-      }));
+        console.error(error);
+      });
   }
 
-  ngOnDestroy(): void {
-    this.subs.forEach(value => value.unsubscribe());
-  }
 
   getCommentsForTopic(topic: Topic): number {
     let total = 0;
@@ -61,4 +65,9 @@ export class BoardIndexPageComponent implements OnInit, OnDestroy {
 
   }
 
+
+  isLoggedIn(): boolean {
+    // TODO ask keycloak
+    return true;
+  }
 }

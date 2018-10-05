@@ -23,23 +23,25 @@
     <div class="post-body w-100">
       <div class="m-4">
         <ul class="posts-buttons nav float-right bg-light text-grey">
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote()" title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote()"
+                                  title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
         </ul>
         <h5 *ngIf="!editing">{{post?.title}}</h5>
         <h5 *ngIf="editing"><input title="post title" [(ngModel)]="editPostTitle"></h5>
         <p class="text-grey">{{post?.creationTime | date:'dd MMM yyyy, HH:mm'}}</p>
         <div *ngIf="!editing" class="content" [innerHTML]="post?.body"></div>
-        <div *ngIf="editing" class="editing" >
+        <div *ngIf="editing" class="editing">
           <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="editPostBody"></textarea>
           <button class="btn btn-outline-warning font-weight-light mb-3" (click)="updatePost()"><i
-            class="fas fa-save"></i> Save changes</button>
+            class="fas fa-save"></i> Save changes
+          </button>
           <button class="btn btn-outline-warning font-weight-light mb-3" (click)="undoChanges()"><i
-            class="fas fa-undo-alt"></i> Undo changes</button>
+            class="fas fa-undo-alt"></i> Undo changes
+          </button>
         </div>
       </div>
     </div>
   </div>
-
 
 
   <div class="post-wrapper d-flex flex-column flex-md-row flex-nowrap my-3"
@@ -50,29 +52,34 @@
     <div class="post-body w-100">
       <div class="m-4">
         <ul class="posts-buttons nav float-right bg-light text-grey">
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="editComment(comment)" title="Edit comment"><i class="far fa-edit"></i></a></li>
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="deleteComment(comment)" title="Delete comment"><i class="far fa-trash-alt"></i></a></li>
-          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote(comment)" title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="editComment(comment)"
+                                  title="Edit comment"><i class="far fa-edit"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="deleteComment(comment)"
+                                  title="Delete comment"><i class="far fa-trash-alt"></i></a></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" (click)="replyWithQuote(comment)"
+                                  title="Reply with quote"><i class="fas fa-quote-left"></i></a></li>
         </ul>
         <h5>RE: {{post.title}}</h5>
         <p class="text-grey">{{comment?.creationTime | date:'dd MMM yyyy, HH:mm'}}</p>
         <div *ngIf="!comment?.editing" class="content" [innerHTML]="comment?.body"></div>
-        <div *ngIf="comment?.editing" class="editing" >
+        <div *ngIf="comment?.editing" class="editing">
           <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="editCommentBody"></textarea>
           <button class="btn btn-outline-warning font-weight-light mb-3" (click)="updateComment(comment)"><i
-            class="fas fa-save"></i> Save changes</button>
+            class="fas fa-save"></i> Save changes
+          </button>
           <button class="btn btn-outline-warning font-weight-light mb-3" (click)="undoChanges(comment)"><i
-            class="fas fa-undo-alt"></i> Undo changes</button>
+            class="fas fa-undo-alt"></i> Undo changes
+          </button>
         </div>
       </div>
     </div>
   </div>
 
 
-
   <div class="post-wrapper px-4 my-3 bg-light">
     <h5 class="mt-2">Reply with a comment</h5>
-    <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="newCommentBody" placeholder="Start typing here to reply to the post"></textarea>
+    <textarea class="w-100 my-2" style="height: 150px;" [(ngModel)]="newCommentBody"
+              placeholder="Start typing here to reply to the post"></textarea>
     <button class="btn btn-outline-warning font-weight-light mb-3" (click)="createComment()"><i
       class="fas fa-paper-plane"></i> Send reply
     </button>

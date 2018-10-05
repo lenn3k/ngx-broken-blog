@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BoardIndexPageComponent } from './board-index-page.component';
+import {BoardIndexPageComponent} from './board-index-page.component';
 
 describe('BoardIndexPageComponent', () => {
   let component: BoardIndexPageComponent;
@@ -8,9 +8,9 @@ describe('BoardIndexPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardIndexPageComponent ]
+      declarations: [BoardIndexPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

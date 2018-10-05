@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NewTopicPageComponent } from './topic-edit-page.component';
+import {NewTopicPageComponent} from './topic-edit-page.component';
 
 describe('NewTopicPageComponent', () => {
   let component: NewTopicPageComponent;
@@ -8,9 +8,9 @@ describe('NewTopicPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewTopicPageComponent ]
+      declarations: [NewTopicPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

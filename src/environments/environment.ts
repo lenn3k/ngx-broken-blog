@@ -5,5 +5,11 @@
 
 export const environment = {
   production: false,
-  backEndUrl: '//localhost:8080/api/v1'
+  backEndUrl: '//localhost:8080/api/v1',
+  // keycloak: {
+  //   realm: '',
+  //   url: '',
+  //   clientId: ''
+  //   registration: ''
+  // }
 };
