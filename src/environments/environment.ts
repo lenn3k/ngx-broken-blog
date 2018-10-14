@@ -6,10 +6,10 @@
 export const environment = {
   production: false,
   backEndUrl: '//localhost:8080/api/v1',
-  // keycloak: {
-  //   realm: '',
-  //   url: '',
-  //   clientId: ''
-  //   registration: ''
-  // }
+  keycloak: {
+    realm: 'brokenblog',
+    url: 'http://localhost:9080/auth/realms/brokenblog',
+    clientId: 'web_app',
+    registration: 'http://localhost:9080/auth/realms/brokenblog/login-actions/registration?client_id='
+  }
 };

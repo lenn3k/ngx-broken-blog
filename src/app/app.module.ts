@@ -14,6 +14,7 @@ import {TopicPageComponent} from './pages/topic-page/topic-page.component';
 import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.component';
 import {PostPageComponent} from './pages/post-page/post-page.component';
 import {LoginPageComponent} from './pages/login-page/login-page.component';
+import {OAuthModule} from 'angular-oauth2-oidc';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
     AppRoutes,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    OAuthModule.forRoot()
   ],
   providers: [
     TopicService,
