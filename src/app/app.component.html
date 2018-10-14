@@ -17,6 +17,14 @@
                 </a>
               </li>
             </div>
+            <div *ngIf="!loggedIn()">
+              <li class="nav-item">
+                <a class="nav-link" (click)="goToRegister()" href="#" title="Login" accesskey="x"><i
+                  class="fa fa-pencil-alt"></i>
+                  <span class="nav-rh-2">Register</span>
+                </a>
+              </li>
+            </div>
             <div *ngIf="loggedIn()">
               <li class="nav-item">
                 <a class="nav-link" (click)="logout()" title="Logout" accesskey="x"><i

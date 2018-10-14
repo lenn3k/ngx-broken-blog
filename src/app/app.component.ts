@@ -28,4 +28,8 @@ export class AppComponent {
 
   logout() {
   }
+
+  goToRegister() {
+    // TODO go to keycloak register page
+  }
 }
