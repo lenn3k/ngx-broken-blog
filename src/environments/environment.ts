@@ -10,6 +10,6 @@ export const environment = {
     realm: 'brokenblog',
     url: 'http://localhost:9080/auth/realms/brokenblog',
     clientId: 'web_app',
-    registration: 'http://localhost:9080/auth/realms/brokenblog/login-actions/registration?client_id='
+    registration: 'http://localhost:9080/auth/realms/brokenblog/registration?client_id='
   }
 };

@@ -29,7 +29,8 @@ export class AppComponent {
   }
 
   get givenName() {
-    return 'derp';
+    const claims = this.oauthService.getIdentityClaims();
+    return claims ? claims['preferred_username'] : 'John Doe';
   }
 
   loggedIn() {
@@ -40,9 +41,10 @@ export class AppComponent {
   }
 
   logout() {
+    this.oauthService.logOut(false);
   }
 
   goToRegister() {
-    // TODO go to keycloak register page
+    window.location.href = environment.keycloak.registration + environment.keycloak.clientId;
   }
 }

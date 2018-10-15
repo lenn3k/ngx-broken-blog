@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TopicService} from '../../shared/services/topic.service';
 import {Topic} from '../../shared/models/topic.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-topic-edit-page',
@@ -16,7 +17,8 @@ export class TopicEditPageComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private ts: TopicService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private oAuthService: OAuthService) {
   }
 
   ngOnInit() {
@@ -58,6 +60,9 @@ export class TopicEditPageComponent implements OnInit {
 
       tempTopic.title = this.newTopicForm.get('topicTitle').value;
       tempTopic.description = this.newTopicForm.get('topicDescription').value;
+
+      const claims = this.oAuthService.getIdentityClaims();
+      tempTopic.author = claims['preferred_username'];
 
       if (this.topic) {
         // Update existing topic

@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {Post} from '../../shared/models/post.model';
 import {Comment} from '../../shared/models/comment.model';
 import {PostService} from '../../shared/services/post.service';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-post-page',
@@ -24,7 +25,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   constructor(private ps: PostService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private oAuthService: OAuthService) {
   }
 
   ngOnInit() {
@@ -86,6 +88,9 @@ export class PostPageComponent implements OnInit, OnDestroy {
   createComment() {
     const tempComment: Comment = {};
     tempComment.body = this.newCommentBody;
+    const claims = this.oAuthService.getIdentityClaims();
+    tempComment.author = claims['preferred_username'];
+
     this.subs.push(this.ps.createCommentForPostId(this.postId, tempComment)
       .subscribe(
         () => this.refreshPost(),

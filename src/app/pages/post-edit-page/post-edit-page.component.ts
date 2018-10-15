@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TopicService} from '../../shared/services/topic.service';
 import {Subscription} from 'rxjs';
 import {Post} from '../../shared/models/post.model';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-post-edit-page',
@@ -20,7 +21,8 @@ export class PostEditPageComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private ts: TopicService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private oAuthService: OAuthService) {
   }
 
   ngOnInit() {
@@ -47,6 +49,9 @@ export class PostEditPageComponent implements OnInit, OnDestroy {
       const tempPost: Post = {};
       tempPost.title = this.newPostForm.get('postTitle').value;
       tempPost.body = this.newPostForm.get('postBody').value;
+
+      const claims = this.oAuthService.getIdentityClaims();
+      tempPost.author = claims['preferred_username'];
 
       this.subs.push(this.ts.createPostForTopicById(tempPost, this.topicId)
         .subscribe(
