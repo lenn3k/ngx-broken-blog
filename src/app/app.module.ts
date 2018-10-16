@@ -15,6 +15,7 @@ import {PostEditPageComponent} from './pages/post-edit-page/post-edit-page.compo
 import {PostPageComponent} from './pages/post-page/post-page.component';
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {OAuthModule} from 'angular-oauth2-oidc';
+import {AuthGuard} from './shared/guards/auth.guard';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import {OAuthModule} from 'angular-oauth2-oidc';
   providers: [
     TopicService,
     PostService,
-    // TODO provide authGuard here
+    AuthGuard,
     // TODO provide interceptor here
   ],
   bootstrap: [AppComponent]

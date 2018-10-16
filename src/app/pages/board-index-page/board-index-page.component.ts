@@ -4,6 +4,7 @@ import {Topic} from '../../shared/models/topic.model';
 import {Post} from '../../shared/models/post.model';
 import {PostService} from '../../shared/services/post.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-board-index-page',
@@ -18,7 +19,8 @@ export class BoardIndexPageComponent implements OnInit {
 
   constructor(private ts: TopicService,
               private ps: PostService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private oAuthService: OAuthService) {
   }
 
   ngOnInit() {
@@ -67,7 +69,6 @@ export class BoardIndexPageComponent implements OnInit {
 
 
   isLoggedIn(): boolean {
-    // TODO ask keycloak
-    return true;
+    return this.oAuthService.hasValidAccessToken();
   }
 }

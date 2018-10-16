@@ -51,7 +51,9 @@
       </ul>
 
     </div>
-    <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
+    <button *ngIf="isLoggedIn()"
+            class="btn btn-outline-warning font-weight-light mb-3"
+            [routerLink]="['','new-topic']"><i
       class="fas fa-plus-circle"></i> create new topic
     </button>
 
@@ -62,8 +64,10 @@
     <div class="forum-list mr-2 w-100">
       <p>There are no topics</p>
 
-      <button class="btn btn-outline-warning font-weight-light mb-3" [routerLink]="['','new-topic']"><i
-        class="fas fa-plus-circle"></i> create new topic
+      <button *ngIf="isLoggedIn()"
+              class="btn btn-outline-warning font-weight-light mb-3"
+              [routerLink]="['','new-topic']">
+        <i class="fas fa-plus-circle"></i> create new topic
       </button>
     </div>
   </ng-template>

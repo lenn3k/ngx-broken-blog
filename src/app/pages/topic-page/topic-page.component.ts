@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {TopicService} from '../../shared/services/topic.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Topic} from '../../shared/models/topic.model';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-topic-page',
@@ -17,7 +18,8 @@ export class TopicPageComponent implements OnInit, OnDestroy {
 
   constructor(private ts: TopicService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private oAuthService: OAuthService) {
   }
 
   ngOnInit() {
@@ -45,5 +47,9 @@ export class TopicPageComponent implements OnInit, OnDestroy {
 
   editTopic() {
 
+  }
+
+  isLoggedIn() {
+    return this.oAuthService.hasValidAccessToken();
   }
 }

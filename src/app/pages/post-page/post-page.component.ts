@@ -134,4 +134,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
         error => console.error(error)
       ));
   }
+
+  isLoggedIn() {
+    return this.oAuthService.hasValidAccessToken();
+  }
 }
