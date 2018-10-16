@@ -7,7 +7,7 @@ import {BoardIndexPageComponent} from './pages/board-index-page/board-index-page
 import {AppRoutes} from './app.routes';
 import {TopicService} from './shared/services/topic.service';
 import {PostService} from './shared/services/post.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TopicEditPageComponent} from './pages/topic-edit-page/topic-edit-page.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TopicPageComponent} from './pages/topic-page/topic-page.component';
@@ -16,6 +16,8 @@ import {PostPageComponent} from './pages/post-page/post-page.component';
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {AuthGuard} from './shared/guards/auth.guard';
+import {OauthInterceptorService} from './shared/interceptors/oauth-interceptor.service';
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -34,14 +36,22 @@ import {AuthGuard} from './shared/guards/auth.guard';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    OAuthModule.forRoot()
-  ],
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [environment.backEndUrl],
+        sendAccessToken: false
+      }
+    })  ],
   providers: [
     TopicService,
     PostService,
     AuthGuard,
-    // TODO provide interceptor here
-  ],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: OauthInterceptorService,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
